@@ -1,0 +1,11 @@
+_site
+_posts
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+*swp
+*swo
+node_modules
+.idea
+.env

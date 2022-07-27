@@ -1,0 +1,59 @@
+name: build-jekyll-and-deploy
+
+on:
+  workflow_dispatch:
+    branches: [develop]
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.6.1]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Caching
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+
+      - name: Make .env file
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_DROPBOX_GITHUB_PAGES_FOLDER: ${{ secrets.DROPBOX_GITHUB_PAGES_FOLDER }}
+          envkey_DROPBOX_AUTH_REFRESH_TOKEN: ${{ secrets.DROPBOX_AUTH_REFRESH_TOKEN }}
+          envkey_DROPBOX_AUTH_APP_KEY: ${{ secrets.DROPBOX_AUTH_APP_KEY }}
+          envkey_DROPBOX_AUTH_APP_SECRET: ${{ secrets.DROPBOX_AUTH_APP_SECRET}}
+
+      - run: npm install
+      - run: npm run build
+
+      - name: Build Jekyll assets
+        uses:  lemonarc/jekyll-action@1.0.0
+
+      - name: Publish
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN_GITHUB }}
+        with:
+          source-directory: _site
+          destination-github-username: ${{ secrets.USERNAME_GITHUB }}
+          destination-repository-name: ${{ secrets.REPOSITORY_GITHUB }}
+          target-branch: gh-pages
+          user-email: ${{ secrets.EMAIL_GITHUB }}
