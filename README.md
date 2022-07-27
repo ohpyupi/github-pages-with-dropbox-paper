@@ -4,7 +4,7 @@ Users can create blog contents using [Dropbox Paper], and can deploy the content
 automated job using [Github Action].
 
 # How to set up
-1. Click the button `Use this template` to create a new repo for your [Github Pages] site.
+1. [Create a new Github Pages repository][Create a new Github Pages repo]
 2. [Create a Dropbox app through App Console][Create Dropbox App]
 3. [Create a long-lived refresh token for the Dropbox app][Create Refresh Token]
 4. [Configure Github Action secrets][Configure Github Action Secrets]
@@ -61,6 +61,7 @@ jekyll serve
 [Jekyll Quickstart]: https://jekyllrb.com/docs/
 [Node.js]: https://nodejs.org
 [Ruby]: https://www.ruby-lang.org/
+[Create a new Github Pages repo]: docs/create-new-repo.md
 [Create Dropbox App]: docs/dropbox-app.md
 [Create Refresh Token]: docs/refresh-token.md
 [Configure Github Action Secrets]: docs/github-action-secrets.md
