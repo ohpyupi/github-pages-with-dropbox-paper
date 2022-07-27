@@ -37,8 +37,18 @@ to see the changes.
 </p>
 
 # How to test it locally
-To run your [Github Pages] site locally, you need to have [Ruby] and [Node.js] environments set up. And, to generate static site assets,
-you also need [Jekyll] set up as well. Check out this document [Jekyll Quickstart] to configure
+To run your [Github Pages] site locally, you need to configure the followings:
+
+1. Set up [Ruby] and [Node.js] environments set up
+2. Set up [Jekyll] to generate static site assets. Check out this document [Jekyll Quickstart] to configure
+3. Clone your [Github Pages] repo to your local machine.
+4. Set up `.env` file in the local repo, and add the variables:
+   1. `DROPBOX_AUTH_APP_KEY`
+   2. `DROPBOX_AUTH_APP_SECRET`
+   3. `DROPBOX_AUTH_REFRESH_TOKEN`
+   4. `DROPBOX_GITHUB_PAGES_FOLDER`
+   5. Check [here][Configure Github Action Secrets] for details about the variables
+
 
 ```bash
 # 1. export Dropbox Paper docs
