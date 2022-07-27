@@ -56,4 +56,3 @@ jobs:
           destination-github-username: ${{ github.repository_owner }}
           destination-repository-name: ${{ github.event.repository.name }}
           target-branch: gh-pages
-          user-email: ${{ secrets.EMAIL_GITHUB }}
