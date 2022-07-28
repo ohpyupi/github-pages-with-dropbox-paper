@@ -40,8 +40,10 @@ jobs:
           envkey_DROPBOX_AUTH_REFRESH_TOKEN: ${{ secrets.DROPBOX_AUTH_REFRESH_TOKEN }}
           envkey_DROPBOX_AUTH_APP_KEY: ${{ secrets.DROPBOX_AUTH_APP_KEY }}
           envkey_DROPBOX_AUTH_APP_SECRET: ${{ secrets.DROPBOX_AUTH_APP_SECRET}}
+          envkey_BASE_URL_GITHUB_PAGES: ${{ secrets.BASE_URL_GITHUB_PAGES }}
 
       - run: npm install
+      - run: npm run update-jekyll-config
       - run: npm run build
 
       - name: Build Jekyll assets

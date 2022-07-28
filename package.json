@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "update-jekyll-config": "node scripts/update-jekyll-config.js",
     "build": "node scripts/build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +20,8 @@
   "homepage": "https://github.com/ohpyupi/github-pages-with-dropbox-paper",
   "dependencies": {
     "cross-fetch": "^3.1.5",
-    "dotenv": "^16.0.1"
+    "dotenv": "^16.0.1",
+    "load-yaml-file": "^1.0.0",
+    "write-yaml-file": "^4.2.0"
   }
 }
