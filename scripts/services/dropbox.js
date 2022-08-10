@@ -3,19 +3,33 @@ const DROPBOX_API_V2_URL = 'https://api.dropboxapi.com/2';
 const DROPBOX_CONTENT_API_V2_URL = 'https://content.dropboxapi.com/2';
 const DROPBOX_AUTH_URL = "https://api.dropboxapi.com/oauth2";
 
-const dropboxAuthToken = async ({ refreshToken, clientId, clientSecret, grantType  }) => {
-    const endpoint = `${DROPBOX_AUTH_URL}/token`; 
+const dropboxAuthToken = async ({ refreshToken, clientId, clientSecret, grantType, codeVerifier, code  }) => {
+    const endpoint = `${DROPBOX_AUTH_URL}/token`;
+    const searchParams = new URLSearchParams();
+    if (clientId) {
+        searchParams.set("client_id", clientId);
+    }
+    if (clientSecret) {
+        searchParams.set("client_secret", clientSecret);
+    }
+    if (refreshToken) {
+        searchParams.set("refresh_token", refreshToken);
+    }
+    if (grantType) {
+        searchParams.set("grant_type", grantType);
+    }
+    if (code) {
+        searchParams.set("code", code);
+    }
+    if (codeVerifier) {
+        searchParams.set("code_verifier", codeVerifier);
+    }
     const result = await fetch(endpoint, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: new URLSearchParams({
-            client_id: clientId,
-            client_secret: clientSecret,
-            refresh_token: refreshToken,
-            grant_type: grantType,
-        }),
+        body: searchParams
     });
     return await result.json();
 };
